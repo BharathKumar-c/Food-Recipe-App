@@ -13,6 +13,7 @@
     "@react-native-seoul/masonry-list": "^1.4.2",
     "@react-navigation/native": "^6.1.8",
     "@react-navigation/native-stack": "^6.9.14",
+    "axios": "^1.5.1",
     "expo": "~49.0.13",
     "expo-status-bar": "~1.6.0",
     "nativewind": "^2.0.11",
