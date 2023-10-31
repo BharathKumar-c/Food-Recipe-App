@@ -46,6 +46,12 @@ const HomeScreen = () => {
     }
   };
 
+  const handleChangeCategory = (category) => {
+    getRecipes(category);
+    setActiveCategory(category);
+    setMeals([]);
+  };
+
   return (
     <View className="flex-1 bg-white">
       <StatusBar style="dark" />
@@ -104,7 +110,7 @@ const HomeScreen = () => {
             <Categories
               categories={categories}
               activeCategory={activeCategory}
-              setActiveCategory={setActiveCategory}
+              handleChangeCategory={handleChangeCategory}
             />
           )}
         </View>

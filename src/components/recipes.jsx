@@ -5,8 +5,8 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import MasonryList from '@react-native-seoul/masonry-list';
-import {mealData} from '../constants';
 import Animated, {FadeInDown} from 'react-native-reanimated';
+import Loading from './loading';
 
 const Recipes = ({categories, meals}) => {
   return (
@@ -17,13 +17,17 @@ const Recipes = ({categories, meals}) => {
         Recipes
       </Text>
       <View>
-        {categories.length == 0 || meals.length == 0 ? null : (
+        {categories.length == 0 || meals.length == 0 ? (
+          <Loading size="large" className="mt-20" />
+        ) : (
           <MasonryList
             data={meals}
             keyExtractor={(item) => item.id}
             numColumns={2}
             showsVerticalScrollIndicator={false}
-            renderItem={({item, i}) => <RecipeCard item={item} index={i} />}
+            renderItem={({item, i}) => {
+              return <RecipeCard item={item} index={i} />;
+            }}
             //   refreshing={isLoadingNext}
             //   onRefresh={() => refetch({first: ITEM_CNT})}
             onEndReachedThreshold={0.1}
@@ -51,7 +55,7 @@ const RecipeCard = ({item, index}) => {
         }}
         className="flex justify-center mb-4 space-y-1">
         <Image
-          source={{uri: item.image}}
+          source={{uri: item.strMealThumb}}
           style={{
             width: '100%',
             height: index % 3 == 0 ? hp(25) : hp(35),
@@ -62,7 +66,9 @@ const RecipeCard = ({item, index}) => {
         <Text
           style={{fontSize: hp(1.5)}}
           className="font-semibold ml-2 text-neutral-600">
-          {item.name.length > 20 ? item.name.slice(0, 20) + '...' : item.name}
+          {item.strMeal.length > 20
+            ? item.strMeal.slice(0, 20) + '...'
+            : item.strMeal}
         </Text>
       </Pressable>
     </Animated.View>
